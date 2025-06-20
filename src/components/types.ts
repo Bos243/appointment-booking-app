@@ -8,7 +8,6 @@ export interface AppUser {
   uid: string;
   email: string | null;
   role: Role;
-  fullName?: string;
 }
 
 export interface Appointment {
@@ -25,6 +24,7 @@ export interface User {
   id: string;
   email: string;
   role: "user" | "employee" | "admin";
+  firstName?: string;
 }
 
 export type UserRole = "user" | "employee" | "admin";
