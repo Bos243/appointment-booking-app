@@ -1,11 +1,10 @@
 :root {
-  /* ===== Sophisticated Color Palette ===== */
-  --primary-dark: #0a192f;       /* Navy blue */
-  --primary-main: #1e4d6b;       /* Deep teal */
-  --accent: #d4af37;             /* Gold accent */
-  --text-light: #f8f9fa;         /* Off-white */
-  --text-dark: #212529;          /* Dark gray */
-  --card-bg: #ffffff;            /* Pure white cards */
+  --primary-dark: #0a192f;
+  --primary-main: #1e4d6b;
+  --accent: #d4af37;
+  --text-light: #f8f9fa;
+  --text-dark: #212529;
+  --card-bg: #ffffff;
   --border-radius: 10px;
   --transition: all 0.25s cubic-bezier(0.65, 0, 0.35, 1);
 }
@@ -14,7 +13,7 @@
 body {
   margin: 0;
   font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%);
+  background: linear-gradient(135deg, #e2e6ec 0%, #cfd5e1 100%);
   color: var(--text-dark);
   line-height: 1.6;
 }
@@ -63,8 +62,10 @@ textarea {
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: var(--border-radius);
   font-size: 1rem;
+  font-family: inherit;
   transition: var(--transition);
   background: rgba(245, 247, 250, 0.8);
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
 }
 
 input:focus,
@@ -73,6 +74,15 @@ textarea:focus {
   border-color: var(--primary-main);
   box-shadow: 0 0 0 3px rgba(30, 77, 107, 0.15);
   background: white;
+}
+
+select {
+  appearance: none;
+  background-color: white;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%23212529' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1rem;
 }
 
 /* ===== Buttons ===== */
@@ -90,7 +100,7 @@ button {
 }
 
 button:hover {
-  transform: translateY(-2px);
+  transform: scale(1.02) translateY(-2px);
   box-shadow: 0 6px 16px rgba(30, 77, 107, 0.2);
 }
 
@@ -110,12 +120,23 @@ button:disabled {
     0 0 0 1px rgba(0, 0, 0, 0.02);
   transition: var(--transition);
   border-top: 3px solid transparent;
+  overflow-x: auto;
+  word-break: break-word;
 }
 
 .dashboard-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   border-top-color: var(--accent);
+}
+
+/* Optional: Structured grid layout for content inside cards */
+.dashboard-card .card-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 0.75rem;
+  column-gap: 2rem;
+  word-break: break-word;
 }
 
 /* ===== Lists ===== */
@@ -164,6 +185,10 @@ header {
   h1 {
     font-size: 1.75rem;
   }
+
+  .dashboard-card .card-content {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ===== Accent Elements ===== */
@@ -185,6 +210,7 @@ a:hover {
   background: var(--accent);
   color: white;
 }
+
 /* ===== Dashboard Layout Enhancements ===== */
 .dashboard-header {
   display: flex;
