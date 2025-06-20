@@ -122,8 +122,8 @@ export default function AdminDashboard() {
             <option value="all">All</option>
             {employees.map((emp) => (
               <option key={emp.id} value={emp.id}>
-                {emp.email}
-              </option>
+  {emp.fullName || emp.email || emp.id}
+</option>
             ))}
           </select>
         </label>
@@ -154,10 +154,10 @@ export default function AdminDashboard() {
             >
               <option value="all">All</option>
               {employees.map((emp: User) => (
-                <option key={emp.id} value={emp.id}>
-                  {emp.email}
-                </option>
-              ))}
+  <option key={emp.id} value={emp.id}>
+    {emp.fullName || emp.email || emp.id}
+  </option>
+))}
             </select>
           </label>
         </div>
