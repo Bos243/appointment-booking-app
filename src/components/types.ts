@@ -24,7 +24,7 @@ export interface User {
   id: string;
   email: string;
   role: "user" | "employee" | "admin";
-  firstName?: string;
+  firstName: string;
 }
 
 export type UserRole = "user" | "employee" | "admin";
