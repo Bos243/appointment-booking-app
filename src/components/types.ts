@@ -10,6 +10,15 @@ export interface AppUser {
   role: Role;
 }
 
+export interface User {
+  id: string;
+  email: string;
+  role: Role;
+  fullName?: string;     // Optional
+  firstName?: string;    // Optional
+  lastName?: string;     // Optional
+}
+
 export interface Appointment {
   id: string;
   userId: string;
@@ -19,30 +28,6 @@ export interface Appointment {
   serviceType: string;
   notes?: string;
 }
-
-export interface User {
-  id: string;
-  email: string;
-  role: "user" | "employee" | "admin";
-  fullName?: string;     // Optional
-  firstName?: string;    // Optional
-  lastName?: string;     // Optional
-}
-
-}
-
-export type UserRole = "user" | "employee" | "admin";
-
-export interface Appointment {
-  id: string;
-  userId: string;
-  employeeId?: string;
-  datetime: Date;
-  status: "pending" | "confirmed" | "completed" | "canceled";
-  serviceType: string;
-  notes?: string;
-}
-
 
 export const availableSlots = [
   "09:00 AM",
