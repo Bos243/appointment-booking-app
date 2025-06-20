@@ -8,6 +8,7 @@ export interface AppUser {
   uid: string;
   email: string | null;
   role: Role;
+  fullName?: string;
 }
 
 export interface Appointment {
