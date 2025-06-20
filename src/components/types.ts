@@ -27,6 +27,7 @@ export interface Appointment {
   status: AppointmentStatus;
   serviceType: string;
   notes?: string;
+  employeeDone?: boolean;
 }
 
 export const availableSlots = [
