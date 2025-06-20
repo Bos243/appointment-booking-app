@@ -1,167 +1,80 @@
 :root {
-  /* ===== Enhanced Color Palette ===== */
-  --primary-dark: #0a192f;       /* Navy blue */
-  --primary-main: #1e4d6b;       /* Deep teal */
-  --accent: #d4af37;             /* Gold accent */
-  --accent-light: #f0e6c2;       /* Light gold */
-  --text-light: #f8f9fa;         /* Off-white */
-  --text-dark: #212529;          /* Dark gray */
-  --text-muted: #6c757d;         /* Muted text */
-  --card-bg: #ffffff;            /* Pure white cards */
-  --border-color: rgba(0, 0, 0, 0.08);
+  /* ===== Your Original Color Palette ===== */
+  --primary-dark: #0a192f;
+  --primary-main: #1e4d6b;
+  --accent: #d4af37;
+  --text-light: #f8f9fa;
+  --text-dark: #212529;
+  --card-bg: #ffffff;
   --border-radius: 10px;
-  --transition: all 0.25s cubic-bezier(0.65, 0, 0.35, 1);
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* ===== Base Styles ===== */
+/* ===== Clean Base Styles ===== */
 body {
-  margin: 0;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  background: linear-gradient(135deg, #f0f4f8 0%, #dfe7f0 100%);
+  font-family: 'Inter', sans-serif;
+  background: #f5f7fa;
   color: var(--text-dark);
-  line-height: 1.6;
-  min-height: 100vh;
+  line-height: 1.5;
+  padding: 20px;
 }
 
-/* ===== Layout Improvements ===== */
-.container {
-  max-width: 1200px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background: var(--card-bg);
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow-md);
-}
-
-/* ===== Table Fixes ===== */
+/* ===== Fixed Table Styles ===== */
 table {
   width: 100%;
   border-collapse: collapse;
-  table-layout: fixed;
-  margin: 1.5rem 0;
+  table-layout: fixed; /* This fixes overflow */
 }
 
-th, td {
-  padding: 1rem;
+td, th {
+  padding: 12px 15px;
   text-align: left;
-  border-bottom: 1px solid var(--border-color);
-  word-wrap: break-word;
-  vertical-align: top;
+  border-bottom: 1px solid #e0e0e0;
+  word-break: break-word; /* Handles long text */
 }
 
-th {
-  background-color: #f8f9fa;
-  font-weight: 600;
-  color: var(--primary-dark);
-}
-
-/* ===== Dashboard Card Improvements ===== */
+/* ===== Card Improvements ===== */
 .dashboard-card {
-  background: var(--card-bg);
+  background: white;
   border-radius: var(--border-radius);
-  padding: 1.75rem;
-  margin-bottom: 1.5rem;
-  box-shadow: var(--shadow-sm);
-  border: 1px solid var(--border-color);
-  overflow: hidden; /* Fixes overflow issues */
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  overflow: hidden; /* Contains content */
 }
 
-.dashboard-card h3 {
-  margin-top: 0;
-  color: var(--primary-dark);
-  border-bottom: 2px solid var(--accent-light);
-  padding-bottom: 0.75rem;
-}
-
-/* ===== Enhanced Header ===== */
+/* ===== Simple Header ===== */
 header {
-  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-main) 100%);
-  padding: 1.5rem 2rem;
+  background: var(--primary-dark);
   color: white;
-  font-size: 1.25rem;
-  font-weight: 600;
-  box-shadow: var(--shadow-md);
-  margin-bottom: 2.5rem;
-  border-radius: 0 0 var(--border-radius) var(--border-radius);
+  padding: 15px 20px;
+  margin-bottom: 25px;
+  border-radius: var(--border-radius);
 }
 
-/* ===== Button Improvements ===== */
+/* ===== Working Buttons ===== */
 button {
-  padding: 0.75rem 1.5rem;
-  background: linear-gradient(135deg, var(--primary-main) 0%, var(--primary-dark) 100%);
+  background: var(--primary-main);
   color: white;
   border: none;
+  padding: 10px 20px;
   border-radius: var(--border-radius);
-  font-weight: 600;
   cursor: pointer;
-  transition: var(--transition);
-  box-shadow: var(--shadow-sm);
+  transition: 0.2s;
 }
 
 button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(30, 77, 107, 0.15);
+  background: #1a4365;
 }
 
 .logout-btn {
   background: transparent;
-  border: 2px solid white;
-  color: white;
+  border: 1px solid white;
 }
 
-.logout-btn:hover {
-  background: white;
-  color: var(--primary-dark);
-}
-
-/* ===== Status Badges ===== */
-.status-badge {
-  display: inline-block;
-  padding: 0.25rem 0.75rem;
-  border-radius: 100px;
-  font-size: 0.85rem;
-  font-weight: 600;
-}
-
-.status-completed {
-  background-color: #e6ffed;
-  color: #22863a;
-}
-
-/* ===== Responsive Improvements ===== */
+/* ===== Responsive Fixes ===== */
 @media (max-width: 768px) {
-  .container {
-    padding: 1.5rem;
-    margin: 1rem;
+  td, th {
+    padding: 8px 10px;
+    font-size: 14px;
   }
-  
-  table {
-    display: block;
-    overflow-x: auto;
-  }
-  
-  th, td {
-    padding: 0.75rem;
-  }
-}
-
-/* ===== Filter Section ===== */
-.filter-section {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-  flex-wrap: wrap;
-}
-
-.filter-group {
-  min-width: 200px;
-}
-
-/* ===== Text Overflow Protection ===== */
-.text-ellipsis {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
