@@ -198,7 +198,7 @@ export default function AdminDashboard() {
                     {app.status === "confirmed" && !app.employeeDone && (
                       <button onClick={() => updateStatus(app.id, "completed")}>Mark Completed</button>
                     )}
-                    {app.employeeDone && app.status !== "completed" && (
+                    {app.employeeDone && (
                       <button
                         onClick={() => confirmEmployeeDone(app.id)}
                         style={{ backgroundColor: "green", color: "white", marginLeft: 8 }}
