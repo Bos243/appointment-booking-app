@@ -1,10 +1,10 @@
-// AdminDashboard.tsx
 import React, { useEffect, useState } from "react";
 import {
   query,
   collection,
   onSnapshot,
   updateDoc,
+  deleteDoc,
   doc,
   getDocs,
   DocumentData,
@@ -15,7 +15,6 @@ import {
 import { db } from "./firebase";
 import { Appointment, User } from "./types";
 
-// Define AppointmentStatus type
 type AppointmentStatus = "pending" | "confirmed" | "completed" | "canceled";
 
 export default function AdminDashboard() {
@@ -43,7 +42,6 @@ export default function AdminDashboard() {
         };
       });
 
-      // Apply filters
       if (filterStatus !== "all") {
         apps = apps.filter((app) => app.status === filterStatus);
       }
@@ -98,7 +96,6 @@ export default function AdminDashboard() {
     }
   };
 
-  // New: Admin confirms employee marked appointment as done
   const confirmEmployeeDone = async (id: string) => {
     try {
       await updateDoc(doc(db, "appointments", id), {
@@ -107,6 +104,17 @@ export default function AdminDashboard() {
       });
     } catch (err: any) {
       alert("Failed to confirm appointment completion: " + err.message);
+    }
+  };
+
+  const deleteAppointment = async (id: string) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this appointment?");
+    if (!confirmDelete) return;
+
+    try {
+      await deleteDoc(doc(db, "appointments", id));
+    } catch (err: any) {
+      alert("Failed to delete appointment: " + err.message);
     }
   };
 
@@ -139,10 +147,9 @@ export default function AdminDashboard() {
         </label>
       </section>
 
-      <section style={{ marginBottom: 24 }}>
+      <section>
         <h3>Appointments ({appointments.length})</h3>
         {appointments.length === 0 && <p>No appointments found.</p>}
-
         <ul>
           {appointments.map((app) => (
             <li
@@ -157,6 +164,7 @@ export default function AdminDashboard() {
                   Awaiting your confirmation — employee marked as done.
                 </em>
               )}
+              <br />
               <strong>User:</strong> {users.find((u) => u.id === app.userId)?.email || app.userId} <br />
               <strong>Assigned Employee:</strong>{" "}
               <select
@@ -196,7 +204,9 @@ export default function AdminDashboard() {
                       </button>
                     )}
                     {app.status === "confirmed" && !app.employeeDone && (
-                      <button onClick={() => updateStatus(app.id, "completed")}>Mark Completed</button>
+                      <button onClick={() => updateStatus(app.id, "completed")}>
+                        Mark Completed
+                      </button>
                     )}
                     {app.employeeDone && (
                       <button
@@ -208,7 +218,16 @@ export default function AdminDashboard() {
                     )}
                   </>
                 )}
-                {(app.status === "completed" || app.status === "canceled") && <em>No further actions available.</em>}
+                {(app.status === "completed" || app.status === "canceled") && (
+                  <em>No further actions available.</em>
+                )}
+                <br />
+                <button
+                  onClick={() => deleteAppointment(app.id)}
+                  style={{ backgroundColor: "red", color: "white", marginTop: 8 }}
+                >
+                  Delete
+                </button>
               </div>
             </li>
           ))}
