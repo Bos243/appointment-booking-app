@@ -48,38 +48,41 @@ export default function UserDashboard({ uid }: { uid: string }) {
   }, [uid]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setLoading(true);
+  e.preventDefault();
+  setLoading(true);
 
-    try {
-      const [hour, minutePart] = time.split(":");
-      const minute = minutePart.slice(0, 2);
-      const ampm = minutePart.slice(3);
-      let hour24 = parseInt(hour);
-      if (ampm === "PM" && hour24 !== 12) hour24 += 12;
-      if (ampm === "AM" && hour24 === 12) hour24 = 0;
+  try {
+    console.log("Submitting appointment with UID:", uid); // ✅ Debug log
 
-      const dt = new Date(date);
-      dt.setHours(hour24, parseInt(minute), 0, 0);
+    const [hour, minutePart] = time.split(":");
+    const minute = minutePart.slice(0, 2);
+    const ampm = minutePart.slice(3);
+    let hour24 = parseInt(hour);
+    if (ampm === "PM" && hour24 !== 12) hour24 += 12;
+    if (ampm === "AM" && hour24 === 12) hour24 = 0;
 
-      await addDoc(collection(db, "appointments"), {
-     userId: uid,
-     employeeId: "",               // required for Firestore schema
-     employeeDone: false,          // default value
-     datetime: Timestamp.fromDate(dt),
-     status: "pending",
-     serviceType,
-     notes: notes || "",           // optional but ensure it's a string
-});
+    const dt = new Date(date);
+    dt.setHours(hour24, parseInt(minute), 0, 0);
+
+    await addDoc(collection(db, "appointments"), {
+      userId: uid,
+      employeeId: "",               // required for Firestore schema
+      employeeDone: false,          // default value
+      datetime: Timestamp.fromDate(dt),
+      status: "pending",
+      serviceType,
+      notes: notes || "",           // optional but ensure it's a string
+    });
 
     alert("✅ Appointment requested!");
-      setNotes("");
-    } catch (err: any) {
-      alert("Error booking appointment: " + err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
+    setNotes("");
+  } catch (err: any) {
+    alert("Error booking appointment: " + err.message);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   const cancelAppointment = async (id: string) => {
     if (!window.confirm("Are you sure you want to cancel this appointment?")) return;
