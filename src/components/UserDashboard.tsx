@@ -63,14 +63,16 @@ export default function UserDashboard({ uid }: { uid: string }) {
       dt.setHours(hour24, parseInt(minute), 0, 0);
 
       await addDoc(collection(db, "appointments"), {
-        userId: uid,
-        datetime: Timestamp.fromDate(dt),
-        status: "pending",
-        serviceType,
-        notes,
-      });
+     userId: uid,
+     employeeId: "",               // required for Firestore schema
+     employeeDone: false,          // default value
+     datetime: Timestamp.fromDate(dt),
+     status: "pending",
+     serviceType,
+     notes: notes || "",           // optional but ensure it's a string
+});
 
-      alert("✅ Appointment requested!");
+    alert("✅ Appointment requested!");
       setNotes("");
     } catch (err: any) {
       alert("Error booking appointment: " + err.message);
